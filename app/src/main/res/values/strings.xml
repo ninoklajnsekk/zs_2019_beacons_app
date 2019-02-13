@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Zimska sš</string>
+    <string name="current_location">Trenutna lokacija:</string>
+    <string name="unknown_location">Neznana lokacija</string>
+</resources>
