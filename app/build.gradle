@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.zimskasolabeacons"
+        applicationId "si.inova.zimskasola"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -15,9 +15,22 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("./keystores/debug")
+            storePassword "feri123"
+            keyAlias "zimskasola"
+            keyPassword "feri123"
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.zimskasolabeacons
+package si.inova.zimskasola
 
 import org.junit.Test
 

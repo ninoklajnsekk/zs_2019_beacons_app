@@ -1,4 +1,4 @@
-package com.example.zimskasolabeacons
+package si.inova.zimskasola
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

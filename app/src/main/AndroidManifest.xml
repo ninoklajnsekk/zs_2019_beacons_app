@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.zimskasolabeacons">
+          package="com.example.zimskasola">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -18,7 +18,7 @@
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyA2G1NIRXDvoXi6_S8a7UL0f120p1nVtdc" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name="si.inova.zimskasola.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
