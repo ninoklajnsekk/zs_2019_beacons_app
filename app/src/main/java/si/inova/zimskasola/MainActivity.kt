@@ -1,35 +1,30 @@
 package si.inova.zimskasola
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.zimskasola.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), BeaconScanner.Listener {
+class MainActivity : AppCompatActivity(){
 
-    private var scanner = BeaconScanner(this, this)
+    val SPLASH_SCREEN_LENGTH = 2000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
 
-    override fun onStart() {
-        super.onStart()
-        scanner.start()
-    }
+        // Setting a two second delay before the application continues
+        Handler().postDelayed(
+            {
+                var mainIntent = Intent( this ,LoginActivity::class.java)
+                startActivity(mainIntent)
+                finish()
+            }
+            ,SPLASH_SCREEN_LENGTH
+        )
 
-    override fun onStop() {
-        super.onStop()
-        scanner.stop()
-    }
-
-    override fun onBeaconFound(data: String) {
-        tvBeaconAttachment.text = data
-    }
-
-    override fun onBeaconLost(data: String) {
-        tvBeaconAttachment.setText(R.string.unknown_location)
     }
 
 }
