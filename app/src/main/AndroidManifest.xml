@@ -13,6 +13,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="si.inova.zimskasola.CurrentLocationActivity">
+        </activity>
         <activity android:name="si.inova.zimskasola.LoginActivity">
         </activity>
 

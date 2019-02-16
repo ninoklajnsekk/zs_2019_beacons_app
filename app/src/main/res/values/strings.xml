@@ -6,4 +6,5 @@
     <string name="login_for_application">Za uporabo aplikacije se moraš prijaviti</string>
     <string name="log_in">PRIJAVI SE</string>
     <string name="loginFailed_tryAgain">Prijava ni uspela, prosim poskusite ponovno.</string>
+
 </resources>
