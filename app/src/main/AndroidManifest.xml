@@ -4,6 +4,7 @@
           package="com.example.zimskasola">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
             android:allowBackup="false"
@@ -20,7 +21,7 @@
 
         <meta-data
                 android:name="com.google.android.nearby.messages.API_KEY"
-                android:value="AIzaSyA2G1NIRXDvoXi6_S8a7UL0f120p1nVtdc"/>
+                android:value="AIzaSyA1YSEpRR_9IKDgryobePQAgZdIicjMs-E"/>
 
         <activity android:name="si.inova.zimskasola.MainActivity">
             <intent-filter>

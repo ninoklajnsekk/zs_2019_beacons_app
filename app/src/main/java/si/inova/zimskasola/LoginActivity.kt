@@ -20,8 +20,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
 
     var firebaseAuth: FirebaseAuth? = null
-    var gso : GoogleSignInOptions? = null
-    var mGoogleSignInClient : GoogleSignInClient? = null
+    var gso: GoogleSignInOptions? = null
+    var mGoogleSignInClient: GoogleSignInClient? = null
     // Random request code, when onResultAct is triggered you know the call was made from google sign in method
     private val RC_SIGN_IN = 9001
 
@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         /*
         * Delete before release
         */
-        et_username.text.insert(0,"ninoklajnsekk@gmail.com")
-        et_password.text.insert(0,"ninoklajnsek")
+        et_username.text.insert(0, "ninoklajnsekk@gmail.com")
+        et_password.text.insert(0, "ninoklajnsek")
 
         /* Initialize variables */
         firebaseAuth = FirebaseAuth.getInstance()
@@ -41,16 +41,16 @@ class LoginActivity : AppCompatActivity() {
             .requestIdToken("329347550650-j5fl321svlcfkhleu2sor4rkcbeu1k82.apps.googleusercontent.com")
             .requestEmail()
             .build()
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso!!)
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso!!)
 
         button_loginWithMail.setOnClickListener {
 
             // Start loading screen inbetween cred check
-            if(!et_username.text.toString().isNullOrBlank() && !et_password.text.toString().isNullOrBlank())
-                checkCredentialsAndLogin(et_username.text.toString(),et_password.text.toString())
+            if (!et_username.text.toString().isNullOrBlank() && !et_password.text.toString().isNullOrBlank())
+                checkCredentialsAndLogin(et_username.text.toString(), et_password.text.toString())
         }
 
-        cl_loginWithG_button.setOnClickListener{
+        cl_loginWithG_button.setOnClickListener {
             val signInIntent = mGoogleSignInClient?.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
 
@@ -61,30 +61,24 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == RC_SIGN_IN)
-        {
+        if (requestCode == RC_SIGN_IN) {
 
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
 
                 val credentials = GoogleAuthProvider.getCredential(account!!.idToken, null)
-                firebaseAuth!!.signInWithCredential(credentials).addOnCompleteListener(this){
-                    if(task.isSuccessful)
-                    {
+                firebaseAuth!!.signInWithCredential(credentials).addOnCompleteListener(this) {
+                    if (task.isSuccessful) {
                         loginSuccessful()
-                    }
-                    else{
+                    } else {
                         loginUnsuccessful()
                     }
                 }
 
-            }
-            catch (e: ApiException)
-            {
+            } catch (e: ApiException) {
                 Log.d("GoogleSignInFailed", e.printStackTrace().toString())
             }
-
 
 
         }
@@ -98,9 +92,9 @@ class LoginActivity : AppCompatActivity() {
     // Check if login was successful return results, if not return null
     fun checkCredentialsAndLogin(email: String, password: String) {
 
-        firebaseAuth?.signInWithEmailAndPassword(email,password)?.addOnCompleteListener {
+        firebaseAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener {
 
-            if(it.isSuccessful) {
+            if (it.isSuccessful) {
                 loginSuccessful()
                 return@addOnCompleteListener
             }
@@ -112,10 +106,9 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun loginSuccessful()
-    {
+    fun loginSuccessful() {
 
-        val i = Intent(this, CurrentLocationActivity :: class.java)
+        val i = Intent(this, CurrentLocationActivity::class.java)
         startActivity(i)
         finish()
 
