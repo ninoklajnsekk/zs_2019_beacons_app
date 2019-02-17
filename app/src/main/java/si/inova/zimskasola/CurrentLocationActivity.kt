@@ -69,6 +69,7 @@ class CurrentLocationActivity : AppCompatActivity() {
         when(requestCode) {
             RC_FINELOCATION_PERMISSION -> {
 
+                Log.d("LOCATION_PERMISSION","S")
                 // Do your thing
 
             }
