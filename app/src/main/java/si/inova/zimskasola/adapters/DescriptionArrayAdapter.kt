@@ -11,12 +11,13 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 
 import com.example.zimskasola.R
-import si.inova.zimskasola.CurrentLocationActivity
 
-class DescriptionArrayAdapter(context: Context, resource: Int, objects: List<CurrentLocationActivity.DescriptionItem?>)
-    :ArrayAdapter<CurrentLocationActivity.DescriptionItem>(context,resource,objects){
+import si.inova.zimskasola.data.Stuff
 
-    val descriptionItemList = objects
+class DescriptionArrayAdapter(context: Context, resource: Int, objects: List<Stuff?>)
+    :ArrayAdapter<Stuff?>(context,resource,objects){
+
+    val stuffList = objects
     val currContext = context
 
 
@@ -27,27 +28,20 @@ class DescriptionArrayAdapter(context: Context, resource: Int, objects: List<Cur
         if( view == null)
             view = LayoutInflater.from(currContext).inflate(R.layout.description_items_item_list,null)
 
-        val descriptionItem = descriptionItemList[position]
+        val stuffItem = stuffList[position]
 
         val tv_title: TextView = view!!.findViewById(R.id.tv_title)
         val tv_subtitle: TextView = view.findViewById(R.id.tv_subtitle)
         val tv_type: TextView = view.findViewById(R.id.tv_type)
         val iv_type_icon: ImageView = view.findViewById(R.id.iv_typeIcon)
 
-        tv_title.text = descriptionItem?.title
-        tv_subtitle.text = descriptionItem?.subtitle
-        tv_type.text = descriptionItem?.type
+        tv_title.text = stuffItem?.category
+        tv_subtitle.text = stuffItem?.name
+        tv_type.text = stuffItem?.description
 
-        Glide.with(view).load(descriptionItem?.type_icon).into(iv_type_icon)
+        Glide.with(view).load(stuffItem?.icon).into(iv_type_icon)
 
         return view
 
     }
-    fun addImage(view: View, string:String){
-
-
-
-
-    }
-
 }

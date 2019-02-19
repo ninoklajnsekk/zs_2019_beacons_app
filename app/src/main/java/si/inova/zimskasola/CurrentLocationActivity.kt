@@ -2,32 +2,26 @@ package si.inova.zimskasola
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.zimskasola.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_current_location.*
 import si.inova.zimskasola.adapters.DescriptionArrayAdapter
+import si.inova.zimskasola.data.Location
+import si.inova.zimskasola.data.LocationData
+import si.inova.zimskasola.data.VolleyCallback
 import si.inova.zimskasola.observers.BeaconInformation
 import si.inova.zimskasola.observers.BeaconObserver
 import si.inova.zimskasola.observers.Observer
 
-class CurrentLocationActivity : AppCompatActivity() {
+class CurrentLocationActivity : FragmentActivity() {
 
     private val RC_INTERNET_PERMISION = 5050
     private val RC_FINELOCATION_PERMISSION = 5060
@@ -35,8 +29,7 @@ class CurrentLocationActivity : AppCompatActivity() {
     val beaconObserver: Observer = BeaconObserver(this)
     val beaconScanner: BeaconScanner = BeaconScanner(this)
 
-    var descriptionItems: MutableList<DescriptionItem?> = mutableListOf()
-    var placeInfo: Place? = null
+    var location: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +81,23 @@ class CurrentLocationActivity : AppCompatActivity() {
 
     fun updateBeacon(beaconInformation: BeaconInformation) {
         val database = FirebaseFirestore.getInstance()
+        val callback = object:VolleyCallback {
+            override fun onSuccessResponse(result: si.inova.zimskasola.data.Location) {
+                Log.d("suh", "suh")
+                location = result
+                updateLocation(beaconInformation)
+            }
+        }
+        val loc = LocationData(this, callback)
+        loc.getLocationData()
+
+
+
+
+        /*database.collection("/locations").document("${beaconInformation.location}").get().addOnSuccessListener { documentSnapshot ->
+            locationInfo = documentSnapshot.toObject(Location::class.java)
+            updateLocationInfo()
+        }
 
         database.collection("/locations/${beaconInformation.location}/places/").document("${beaconInformation.place}").get().addOnSuccessListener { documentSnapshot ->
             placeInfo = documentSnapshot.toObject(Place::class.java)
@@ -98,41 +108,30 @@ class CurrentLocationActivity : AppCompatActivity() {
         database.collection("/locations/${beaconInformation.location}/places/${beaconInformation.place}/description_items/").addSnapshotListener{data,error->
             descriptionItems = data!!.documents.map{ it.toObject(DescriptionItem::class.java)}.toMutableList()
             updateListView()
+        }*/
+
+    }
+    fun updateLocation(beaconInformation: BeaconInformation){
+        // Update location
+        tv_companyName.text = location?.title
+        tv_location.text = location?.description
+
+        // Update floor and room
+        for(floor in location!!.floors)
+        {
+            if(floor.floor_id==beaconInformation.place)
+            {
+                tv_roomPosition.text = floor.name
+                for(room in floor.rooms)
+                {
+                    if(room.room_id == beaconInformation.item){
+                        tv_roomName.text = room.name
+                        Glide.with(this).load(room.image).into(iv_roomImage)
+                        lv_currentLocation_items.adapter = DescriptionArrayAdapter(this,R.id.lv_currentLocation_items,room.stuff.toList())
+                        return
+                    }
+                }
+            }
         }
-
     }
-
-    fun updatePlaceInfo(){
-
-        tv_roomName.text = placeInfo?.name
-        tv_roomPosition.text = placeInfo?.floor
-        Glide.with(this).load(placeInfo?.image).into(iv_roomImage)
-
-    }
-
-    fun updateListView(){
-
-        Log.d("UpdateListView", descriptionItems.size.toString())
-        lv_currentLocation_items.adapter = DescriptionArrayAdapter(this,R.id.lv_currentLocation_items,descriptionItems.toList())
-
-    }
-
-    data class DescriptionItem(
-        var subtitle: String,
-        var title: String,
-        var type: String,
-        var type_icon: String
-    ){
-        constructor() : this("","","","")
-    }
-
-    data class Place(
-        var floor: String,
-        var image: String,
-        var name: String
-    ){
-        constructor() : this("","","")
-    }
-
-
 }

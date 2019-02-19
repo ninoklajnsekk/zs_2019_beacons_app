@@ -3,11 +3,15 @@ package si.inova.zimskasola
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.example.zimskasola.R
 import kotlinx.android.synthetic.main.activity_main.*
+import si.inova.zimskasola.data.Location
+import si.inova.zimskasola.data.LocationData
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : FragmentActivity(){
 
     val SPLASH_SCREEN_LENGTH = 2000L
 
