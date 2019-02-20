@@ -8,4 +8,8 @@
     <string name="loginFailed_tryAgain">Prijava ni uspela, prosim poskusite ponovno.</string>
     <string name="nahajas_se_v">NAHAJAŠ SE V</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main_swipe">MainSwipeActivity</string>
+
 </resources>

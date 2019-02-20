@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context="si.inova.zimskasola.MainActivity">
+                                                   tools:context="si.inova.zimskasola.activities.MainActivity">
 
     <ImageView android:layout_width="116dp" android:layout_height="14dp"
                android:src="@drawable/beacons"

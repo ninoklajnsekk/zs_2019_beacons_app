@@ -1,15 +1,10 @@
-package si.inova.zimskasola
+package si.inova.zimskasola.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.zimskasola.R
-import kotlinx.android.synthetic.main.activity_main.*
-import si.inova.zimskasola.data.Location
-import si.inova.zimskasola.data.LocationData
 
 class MainActivity : FragmentActivity(){
 
@@ -22,7 +17,7 @@ class MainActivity : FragmentActivity(){
         // Setting a two second delay before the application continues
         Handler().postDelayed(
             {
-                var mainIntent = Intent( this ,LoginActivity::class.java)
+                var mainIntent = Intent( this , LoginActivity::class.java)
                 startActivity(mainIntent)
                 finish()
             }

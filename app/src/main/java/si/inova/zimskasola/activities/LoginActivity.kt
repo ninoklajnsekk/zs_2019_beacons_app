@@ -1,18 +1,15 @@
-package si.inova.zimskasola
+package si.inova.zimskasola.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.View
 import com.example.zimskasola.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.signin.internal.SignInClientImpl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
@@ -108,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun loginSuccessful() {
 
-        val i = Intent(this, CurrentLocationActivity::class.java)
+        val i = Intent(this, MainSwipeActivity::class.java)
         startActivity(i)
         finish()
 

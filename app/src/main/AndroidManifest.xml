@@ -14,16 +14,19 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="si.inova.zimskasola.CurrentLocationActivity">
+        <activity
+                android:name="si.inova.zimskasola.activities.MainSwipeActivity"
+                android:label="@string/title_activity_main_swipe"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="si.inova.zimskasola.LoginActivity">
+        <activity android:name="si.inova.zimskasola.activities.LoginActivity">
         </activity>
 
         <meta-data
                 android:name="com.google.android.nearby.messages.API_KEY"
                 android:value="AIzaSyCgbEUXto5M_wV0Ucw6xGOf1iemcU_dv4g"/>
 
-        <activity android:name="si.inova.zimskasola.MainActivity">
+        <activity android:name="si.inova.zimskasola.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import si.inova.zimskasola.CurrentLocationActivity
+import si.inova.zimskasola.activities.RoomListFragment
 
 class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager){
 
-    private val NUM_ITEMS: Int = 3
+    private val NUM_ITEMS: Int = 2
 
     override fun getCount(): Int {
         return NUM_ITEMS
@@ -17,13 +19,13 @@ class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapt
     override fun getItem(position: Int): Fragment {
 
         when(position){
-            0-> Log.d("","")
-            1-> Log.d("","")
+            0-> return CurrentLocationActivity()
+            1-> return RoomListFragment()
             2-> Log.d("","")
 
         }
 
-        return Fragment()
+        return CurrentLocationActivity()
     }
 
 }
