@@ -97,7 +97,7 @@ class MainSwipeActivity : FragmentActivity() {
     private fun setupTabListeners() {
         tabLayout.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

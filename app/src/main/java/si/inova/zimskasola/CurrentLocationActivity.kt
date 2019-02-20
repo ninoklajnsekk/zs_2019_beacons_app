@@ -69,17 +69,28 @@ class CurrentLocationActivity : Fragment() {
         scanBeacons()
 
     }
-    fun checkPermissions(){
 
-        if(ContextCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            Log.d("permission_check","checking fine_location permission")
-            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.ACCESS_FINE_LOCATION))
-                Toast.makeText(context,"We need access to your location to locate you!",Toast.LENGTH_LONG).show()
-            else
-            {
-                Log.d("request_permission","requesting fine_location permission")
-                ActivityCompat.requestPermissions(activity!!,arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),RC_FINELOCATION_PERMISSION)
+    fun checkPermissions() {
+
+        if (ContextCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d("permission_check", "checking fine_location permission")
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    activity!!,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            )
+                Toast.makeText(context, "We need access to your location to locate you!", Toast.LENGTH_LONG).show()
+            else {
+                Log.d("request_permission", "requesting fine_location permission")
+                ActivityCompat.requestPermissions(
+                    activity!!,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    RC_FINELOCATION_PERMISSION
+                )
             }
 
 
@@ -88,17 +99,18 @@ class CurrentLocationActivity : Fragment() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode) {
+        when (requestCode) {
             RC_FINELOCATION_PERMISSION -> {
 
                 // Do your thing
 
             }
-            RC_INTERNET_PERMISION -> { }
+            RC_INTERNET_PERMISION -> {
+            }
         }
     }
 
-    fun scanBeacons(){
+    fun scanBeacons() {
 
         beaconScanner!!.subscribe()
         beaconScanner!!.addObserver(beaconObserver!!)
@@ -106,7 +118,7 @@ class CurrentLocationActivity : Fragment() {
     }
 
     fun updateBeacon(beaconInformation: BeaconInformation) {
-        val callback = object:VolleyCallback {
+        val callback = object : VolleyCallback {
             override fun onSuccessResponse(result: si.inova.zimskasola.data.Location) {
                 Log.d("suh", "suh")
                 location = result
@@ -116,23 +128,22 @@ class CurrentLocationActivity : Fragment() {
         val loc = LocationData(context!!, callback)
         loc.getLocationData()
     }
-    fun updateLocation(beaconInformation: BeaconInformation){
+
+    fun updateLocation(beaconInformation: BeaconInformation) {
         // Update location
         tv_companyName.text = location?.title
         tv_location.text = location?.description
 
         // Update floor and room
-        for(floor in location!!.floors)
-        {
-            if(floor.floor_id==beaconInformation.place)
-            {
+        for (floor in location!!.floors) {
+            if (floor.floor_id == beaconInformation.place) {
                 tv_roomPosition.text = floor.name
-                for(room in floor.rooms)
-                {
-                    if(room.room_id == beaconInformation.item){
+                for (room in floor.rooms) {
+                    if (room.room_id == beaconInformation.item) {
                         tv_roomName.text = room.name
                         Glide.with(this.activity!!).load(room.image).into(iv_roomImage)
-                        lv_currentLocation_items.adapter = DescriptionArrayAdapter(context!!,R.id.lv_currentLocation_items,room.stuff.toList())
+                        lv_currentLocation_items.adapter =
+                            DescriptionArrayAdapter(context!!, R.id.lv_currentLocation_items, room.stuff.toList())
                         return
                     }
                 }
