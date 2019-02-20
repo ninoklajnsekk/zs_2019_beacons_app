@@ -74,6 +74,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             } catch (e: ApiException) {
+                loginUnsuccessful()
                 Log.d("GoogleSignInFailed", e.printStackTrace().toString())
             }
 
@@ -97,12 +98,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginUnsuccessful()
-
         }
-
-
     }
-
     fun loginSuccessful() {
 
         val i = Intent(this, MainSwipeActivity::class.java)

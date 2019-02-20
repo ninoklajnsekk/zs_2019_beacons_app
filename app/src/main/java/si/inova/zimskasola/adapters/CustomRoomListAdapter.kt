@@ -91,4 +91,5 @@ class CustomRoomListAdapter(context: Context, locationList: Location) : BaseAdap
     }
 
 
+
 }
