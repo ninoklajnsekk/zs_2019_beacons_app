@@ -29,8 +29,7 @@ class LoginActivity : AppCompatActivity() {
         /*
         * Delete before release
         */
-        et_username.text.insert(0, "ninoklajnsekk@gmail.com")
-        et_password.text.insert(0, "ninoklajnsek")
+
 
         /* Initialize variables */
         firebaseAuth = FirebaseAuth.getInstance()
@@ -40,15 +39,10 @@ class LoginActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso!!)
 
-        if(mGoogleSignInClient != null)
-            loginSuccessful()
+        //if(mGoogleSignInClient != null)
+            //loginSuccessful()
 
-        button_loginWithMail.setOnClickListener {
 
-            // Start loading screen inbetween cred check
-            if (!et_username.text.toString().isNullOrBlank() && !et_password.text.toString().isNullOrBlank())
-                checkCredentialsAndLogin(et_username.text.toString(), et_password.text.toString())
-        }
 
         cl_loginWithG_button.setOnClickListener {
             val signInIntent = mGoogleSignInClient?.signInIntent

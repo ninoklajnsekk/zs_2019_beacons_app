@@ -26,34 +26,27 @@ class RoomInfoActivity : FragmentActivity() {
                super.onBackPressed()
         }
 
-        var floorIndex = intent.extras.getString("floor")
-        var roomIndex = intent.extras.getString("room")
+        intent.extras.get("floor")
+        var floorIndex: String = intent.extras.get("floor").toString()
+        var roomIndex: String = intent.extras.get("room").toString()
 
         LocationData(this, object : VolleyCallback {
             override fun onSuccessResponse(result: Location) {
                 location = result
-                updateLocation(floorIndex,roomIndex)
+                updateLocation(floorIndex.toInt(),roomIndex.toInt())
             }
         })
 
     }
 
 
-    fun updateLocation(floorIndex: String, roomIndex: String) {
+    fun updateLocation(floorIndex: Int, roomIndex: Int) {
         // Update floor and room
-        for (floor in location!!.floors) {
-            if (floor.floor_id == floorIndex) {
-                tv_roomPositio.text = floor.name
-                for (room in floor.rooms) {
-                    if (room.room_id == roomIndex) {
-                        tv_roomNam.text = room.name
-                        Glide.with(this).load(room.image).into(iv_roomImag)
-                        lv_currentLocation_item.adapter =
-                            DescriptionArrayAdapter(this, R.id.lv_currentLocation_items, room.stuff.toList())
-                        return
-                    }
-                }
-            }
-        }
+        tv_roomPositio.text = location!!.floors.toMutableList()[floorIndex].name
+        Log.d("ime",location!!.floors.toMutableList()[floorIndex].name)
+        tv_roomNam.text = location!!.floors.toMutableList()[floorIndex].rooms.toMutableList()[roomIndex].name
+        Glide.with(this).load(location!!.floors.toMutableList()[floorIndex].rooms.toMutableList()[roomIndex].image).into(iv_roomImag)
+        lv_currentLocation_item.adapter = DescriptionArrayAdapter(this, R.id.lv_currentLocation_items, location!!.floors.toMutableList()[floorIndex].rooms.toMutableList()[roomIndex].stuff.toList())
+        return
     }
 }
