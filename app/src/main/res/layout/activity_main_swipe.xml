@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent">
-
-
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/cl_companyInfo"
                                                        app:layout_constraintTop_toTopOf="parent"
                                                        android:layout_width="match_parent"
                                                        android:layout_height="56dp" android:background="#000000">
-        <ImageView app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="16dp" android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/baseline_refresh_white_18dp" android:visibility="gone" android:id="@+id/iv_refreshButton"/>
+        <ImageView app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="16dp"
+                   android:layout_width="32dp" android:layout_height="32dp"
+                   android:src="@drawable/baseline_refresh_white_18dp" android:visibility="gone"
+                   android:id="@+id/iv_refreshButton"/>
         <TextView android:id="@+id/tv_companyName" android:textColor="#ffffff" android:textSize="15sp"
                   android:fontFamily="@font/montserratextrabold" app:layout_constraintTop_toTopOf="parent"
                   android:layout_marginTop="14dp" app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +27,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
@@ -35,7 +37,8 @@
     />
     <include layout="@layout/default_error_layout"
              android:visibility="gone"
-             android:id="@+id/forced_error" android:layout_height="match_parent" android:layout_width="match_parent" android:layout_below="@id/cl_companyInfo" android:layout_above="@id/tabs"/>
+             android:id="@+id/forced_error" android:layout_height="match_parent" android:layout_width="match_parent"
+             android:layout_below="@id/cl_companyInfo" android:layout_above="@id/tabs"/>
     <androidx.viewpager.widget.ViewPager
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -52,5 +55,5 @@
             android:id="@+id/pager"
             android:layout_above="@id/tabs"
             android:layout_below="@+id/cl_companyInfo"
-            />
+    />
 </RelativeLayout>

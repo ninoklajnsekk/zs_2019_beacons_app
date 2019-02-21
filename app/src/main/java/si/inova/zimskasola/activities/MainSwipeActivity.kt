@@ -29,6 +29,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
+import android.content.Intent
+import si.inova.zimskasola.BackgroundScanService
 
 
 class MainSwipeActivity : FragmentActivity() {
@@ -46,6 +48,8 @@ class MainSwipeActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.zimskasola.R.layout.activity_main_swipe)
+
+    applicationContext.startService((Intent(this, BackgroundScanService::class.java)))
 
         freshBeaconInformation = null
         currentBeaconInformation = null

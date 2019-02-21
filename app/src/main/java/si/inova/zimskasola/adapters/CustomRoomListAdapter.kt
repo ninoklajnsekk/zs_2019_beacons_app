@@ -11,7 +11,10 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.rooms_lv_header.view.*
 import si.inova.zimskasola.data.Location
 import android.R
+import android.content.Intent
+import android.os.Bundle
 import androidx.core.content.ContextCompat.getSystemService
+import si.inova.zimskasola.activities.RoomInfoActivity
 import si.inova.zimskasola.data.Floor
 import kotlin.coroutines.coroutineContext
 import kotlin.math.floor
@@ -65,6 +68,17 @@ class CustomRoomListAdapter(context: Context, locationList: Location) : BaseAdap
             } else {
                 v = inflater.inflate(com.example.zimskasola.R.layout.rooms_lv_child, null)
                 var t: TextView = v!!.findViewById(com.example.zimskasola.R.id.tv_roomName)
+                t.setOnClickListener {
+
+                    var i: Intent = Intent(context,RoomInfoActivity::class.java)
+                    //var bundle: Bundle = Bundle()
+
+                    i.putExtra("floor",getCorrectIndex(position).toMutableList()[0].toString())
+                    i.putExtra("room", getCorrectIndex(position).toMutableList()[1].toString())
+
+                    context.startActivity(i)
+
+                }
                 viewHolder = ViewHolder(t)
                 v.tag = (viewHolder)
             }
@@ -133,6 +147,43 @@ class CustomRoomListAdapter(context: Context, locationList: Location) : BaseAdap
             return locationList.floors.toMutableList()[floorIndex].rooms.toMutableList()[roomIndex].name
         }
     }
+
+    fun getCorrectIndex(position: Int): List<Int> {
+
+        var floorIndex = -1
+        var roomIndex = -1
+        var positionsLeft: Int = position
+        loop@ for (floor in locationList.floors) {
+            roomIndex = -1
+            floorIndex++
+            for (room in floor.rooms) {
+                if (positionsLeft == 0) {
+
+                    break@loop
+                } else {
+                    positionsLeft--
+                    roomIndex++
+                }
+            }
+            if (positionsLeft == 0) {
+
+                break@loop
+            }
+            positionsLeft--
+
+        }
+
+
+        if (roomIndex == -1) {
+
+            return listOf(0, 0)
+            //return locationList.floors.toMutableList()[floorIndex].name
+        } else {
+            return listOf(floorIndex, roomIndex)
+        }
+
+    }
+
 
     override fun getItemViewType(position: Int): Int {
         var cc = 0
