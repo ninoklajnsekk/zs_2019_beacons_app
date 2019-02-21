@@ -21,6 +21,10 @@ class LocationData(context: Context, callback: VolleyCallback) {
     val JSON_URL: String = "https://firebasestorage.googleapis.com/v0/b/zs-beacons-2019.appspot.com/o/25022c4a-3035-11e9-bb6a-a5c92278bce1.json?alt=media&token=4607d4e9-c453-4ce8-9a9a-3b3d76ce244b"
     var request: JsonObjectRequest? = null
 
+    init {
+        getLocationData()
+    }
+
     fun getLocationData() {
         var location: Location? = null
 

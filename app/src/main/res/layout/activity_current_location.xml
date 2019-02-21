@@ -19,28 +19,10 @@
                      android:indeterminateTint="#ffffff"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/cl_companyInfo"
-                                                       app:layout_constraintTop_toTopOf="parent"
-                                                       android:layout_width="match_parent"
-                                                       android:layout_height="56dp" android:background="#000000">
-        <TextView android:id="@+id/tv_companyName" android:textColor="#ffffff" android:textSize="15sp"
-                  android:fontFamily="@font/montserratextrabold" app:layout_constraintTop_toTopOf="parent"
-                  android:layout_marginTop="14dp" app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent" android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-        <TextView android:id="@+id/tv_location" android:textColor="#ffffff" android:textSize="13sp"
-                  android:fontFamily="@font/montserratmedium" app:layout_constraintTop_toBottomOf="@id/tv_companyName"
-                  app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:id="@+id/cl_locationInfo"
-            app:layout_constraintTop_toBottomOf="@id/cl_companyInfo"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="140dp">
 
@@ -73,6 +55,6 @@
           app:layout_constraintEnd_toEndOf="parent"/>
 
     <ListView android:id="@+id/lv_currentLocation_items" app:layout_constraintTop_toBottomOf="@+id/view_horizontalLine"
-              android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="16dp"
-              android:paddingRight="16dp"/>
+              android:layout_width="match_parent" android:layout_height="wrap_content" android:divider="@null"
+              android:dividerHeight="0dp" android:headerDividersEnabled="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

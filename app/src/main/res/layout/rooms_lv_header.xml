@@ -13,6 +13,7 @@
             android:textSize="13sp"
             android:fontFamily="@font/montserratbold"
             android:id="@+id/tv_floorName"
+            android:layout_marginTop="32dp"
             android:text="Hello"/>
 
 </LinearLayout>

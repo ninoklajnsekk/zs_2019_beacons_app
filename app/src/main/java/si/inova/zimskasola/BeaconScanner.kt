@@ -1,21 +1,25 @@
 package si.inova.zimskasola
 
 import android.content.Context
+import android.location.Location
 import android.util.Log
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.messages.*
+import si.inova.zimskasola.data.BeaconCallback
+import si.inova.zimskasola.data.VolleyCallback
 import si.inova.zimskasola.observers.BeaconInformation
 import si.inova.zimskasola.observers.Observer
 
 private const val LOG_TAG = "BeaconScanner"
 
-class BeaconScanner(context: Context) : MessageListener() {
+class BeaconScanner(context: Context, callback: BeaconCallback) : MessageListener() {
 
-    val observerList : MutableList<Observer> =  ArrayList()
+    private val observerList : MutableList<Observer> =  ArrayList()
+    private val callback = callback
 
     val context: Context = context
     var currentBeaconId:String? = null
-    var currentBeaconInformation: BeaconInformation? = null
+    private lateinit var currentBeaconInformation: BeaconInformation
 
 
     override fun onFound(message: Message) {
@@ -35,6 +39,7 @@ class BeaconScanner(context: Context) : MessageListener() {
 
         currentBeaconInformation = BeaconInformation(location,place,item)
 
+        callback.onSuccessResponse(currentBeaconInformation)
         notifyObservers()
     }
 
@@ -66,7 +71,7 @@ class BeaconScanner(context: Context) : MessageListener() {
         observerList.add(observer)
 
     }
-    fun notifyObservers(){
+    private fun notifyObservers(){
 
         for(observer in observerList)
         {
