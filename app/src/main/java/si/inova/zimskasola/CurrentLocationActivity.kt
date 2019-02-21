@@ -162,7 +162,7 @@ class CurrentLocationActivity : Fragment() {
                 for (room in floor.rooms) {
                     if (room.room_id == beaconInformation.item) {
                         tv_roomName.text = room.name
-                        Glide.with(this.activity!!).load(room.image).into(iv_roomImage)
+                        Glide.with(this.activity!!).load(room.image).placeholder(R.drawable.defaultimage).into(iv_roomImage)
                         lv_currentLocation_items.adapter =
                             DescriptionArrayAdapter(context!!, R.id.lv_currentLocation_items, room.stuff.toList())
                         return

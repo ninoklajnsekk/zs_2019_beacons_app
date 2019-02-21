@@ -25,6 +25,12 @@ import si.inova.zimskasola.data.LocationData
 import si.inova.zimskasola.data.VolleyCallback
 import si.inova.zimskasola.observers.BeaconInformation
 import android.R
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import java.util.*
+import kotlin.concurrent.scheduleAtFixedRate
+import kotlin.concurrent.thread
 
 
 class MainSwipeActivity : FragmentActivity() {
@@ -55,6 +61,26 @@ class MainSwipeActivity : FragmentActivity() {
         setupTabListeners()
         /***************************************************************/
 
+        action()
+
+        if(!checkInternetConnectivity())
+        { // To je malo mimo atm
+            forced_error.visibility = View.VISIBLE
+            pager.visibility = View.GONE
+
+            Timer().scheduleAtFixedRate(0,10000) {
+                if(checkInternetConnectivity()) {
+                    action()
+                    forced_error.visibility = View.GONE
+                    pager.visibility = View.VISIBLE
+                }
+            }
+        }
+
+    }
+
+    private fun action(){
+
         LocationData(this, object : VolleyCallback {
             override fun onSuccessResponse(result: Location) {
                 locationData = result
@@ -79,8 +105,8 @@ class MainSwipeActivity : FragmentActivity() {
 
         })
         beaconScanner.subscribe()
-    }
 
+    }
     private fun notifyUser() {
 
         iv_refreshButton.visibility = View.VISIBLE
@@ -244,6 +270,14 @@ class MainSwipeActivity : FragmentActivity() {
             }
 
         })
+    }
+
+    fun checkInternetConnectivity(): Boolean {
+
+        var connectivityManager: ConnectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        var activeNetworkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+
     }
 
     override fun onDestroy() {

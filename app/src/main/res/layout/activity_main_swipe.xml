@@ -4,6 +4,8 @@
                                                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent">
 
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/cl_companyInfo"
                                                        app:layout_constraintTop_toTopOf="parent"
                                                        android:layout_width="match_parent"
@@ -31,6 +33,9 @@
             android:layout_alignParentBottom="true"
             android:background="#fff"
     />
+    <include layout="@layout/default_error_layout"
+             android:visibility="gone"
+             android:id="@+id/forced_error" android:layout_height="match_parent" android:layout_width="match_parent" android:layout_below="@id/cl_companyInfo" android:layout_above="@id/tabs"/>
     <androidx.viewpager.widget.ViewPager
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
