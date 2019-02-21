@@ -40,6 +40,9 @@ class LoginActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso!!)
 
+        if(mGoogleSignInClient != null)
+            loginSuccessful()
+
         button_loginWithMail.setOnClickListener {
 
             // Start loading screen inbetween cred check
@@ -58,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == RC_SIGN_IN) {
 
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
