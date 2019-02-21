@@ -1,31 +1,27 @@
 package si.inova.zimskasola
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.zimskasola.R
-import com.google.firebase.firestore.FirebaseFirestore
+
+import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.android.synthetic.main.activity_current_location.*
 import si.inova.zimskasola.adapters.DescriptionArrayAdapter
-import si.inova.zimskasola.data.BeaconCallback
-import si.inova.zimskasola.data.Location
-import si.inova.zimskasola.data.LocationData
-import si.inova.zimskasola.data.VolleyCallback
+import si.inova.zimskasola.data.*
 import si.inova.zimskasola.observers.BeaconInformation
-import si.inova.zimskasola.observers.BeaconObserver
+
 import si.inova.zimskasola.observers.Observer
 
 class CurrentLocationActivity : Fragment() {
@@ -41,27 +37,32 @@ class CurrentLocationActivity : Fragment() {
 
     var currentContext: Context? = null
 
+    lateinit var shimmerLayout: ShimmerFrameLayout
+
+    init {
+        currentContext = context
+    }
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
         currentContext = context
+        var view =  inflater.inflate(R.layout.activity_current_location, container, false)
 
-        beaconScanner = BeaconScanner(context!!, object:BeaconCallback{
-            override fun onSuccessResponse(beaconInformation: BeaconInformation) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-        beaconObserver = BeaconObserver(this)
+        shimmerLayout = view.findViewById(R.id.shimmer_view_container)
+        shimmerLayout.startShimmer()
 
-
-
-        return inflater.inflate(R.layout.activity_current_location, container, false)
+        return view
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+
+
         //setContentView(R.layout.activity_current_location)
     }
 
@@ -154,6 +155,10 @@ class CurrentLocationActivity : Fragment() {
         }
     }
     fun updateDataset(location: Location, beaconInformation: BeaconInformation){
+
+        shimmerLayout.stopShimmer()
+        shimmerLayout.visibility = View.GONE
+        tv_pre_currently.text = "NAHAJAŠ SE V"
         this.location = location
         this.beaconInformation = beaconInformation
         for (floor in location!!.floors) {

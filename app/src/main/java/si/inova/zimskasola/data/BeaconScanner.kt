@@ -1,12 +1,9 @@
-package si.inova.zimskasola
+package si.inova.zimskasola.data
 
 import android.content.Context
-import android.location.Location
 import android.util.Log
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.messages.*
-import si.inova.zimskasola.data.BeaconCallback
-import si.inova.zimskasola.data.VolleyCallback
 import si.inova.zimskasola.observers.BeaconInformation
 import si.inova.zimskasola.observers.Observer
 

@@ -1,6 +1,5 @@
 package si.inova.zimskasola.observers
 
-import si.inova.zimskasola.BeaconScanner
 import si.inova.zimskasola.CurrentLocationActivity
 
 class BeaconObserver(currentLocationActivity: CurrentLocationActivity) : Observer {

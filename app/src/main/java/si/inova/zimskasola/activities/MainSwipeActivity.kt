@@ -17,20 +17,18 @@ import androidx.core.content.ContextCompat
 
 import com.google.android.material.tabs.TabLayout
 
-import si.inova.zimskasola.BeaconScanner
+import si.inova.zimskasola.data.BeaconScanner
 import si.inova.zimskasola.CurrentLocationActivity
 import si.inova.zimskasola.data.BeaconCallback
 import si.inova.zimskasola.data.Location
 import si.inova.zimskasola.data.LocationData
 import si.inova.zimskasola.data.VolleyCallback
 import si.inova.zimskasola.observers.BeaconInformation
-import android.R
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
-import kotlin.concurrent.thread
 
 
 class MainSwipeActivity : FragmentActivity() {
