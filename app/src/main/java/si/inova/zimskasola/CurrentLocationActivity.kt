@@ -20,6 +20,7 @@ import com.example.zimskasola.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_current_location.*
 import si.inova.zimskasola.adapters.DescriptionArrayAdapter
+import si.inova.zimskasola.data.BeaconCallback
 import si.inova.zimskasola.data.Location
 import si.inova.zimskasola.data.LocationData
 import si.inova.zimskasola.data.VolleyCallback
@@ -36,6 +37,7 @@ class CurrentLocationActivity : Fragment() {
     var beaconScanner: BeaconScanner? = null
 
     var location: Location? = null
+    var beaconInformation: BeaconInformation? = null
 
     var currentContext: Context? = null
 
@@ -44,7 +46,11 @@ class CurrentLocationActivity : Fragment() {
 
         currentContext = context
 
-        beaconScanner = BeaconScanner(context!!)
+        beaconScanner = BeaconScanner(context!!, object:BeaconCallback{
+            override fun onSuccessResponse(beaconInformation: BeaconInformation) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
         beaconObserver = BeaconObserver(this)
 
 
@@ -54,6 +60,7 @@ class CurrentLocationActivity : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_current_location)
     }
@@ -66,7 +73,7 @@ class CurrentLocationActivity : Fragment() {
 
         checkPermissions()
 
-        scanBeacons()
+        //scanBeacons()
 
     }
 
@@ -130,10 +137,6 @@ class CurrentLocationActivity : Fragment() {
     }
 
     fun updateLocation(beaconInformation: BeaconInformation) {
-        // Update location
-        tv_companyName.text = location?.title
-        tv_location.text = location?.description
-
         // Update floor and room
         for (floor in location!!.floors) {
             if (floor.floor_id == beaconInformation.place) {
@@ -149,5 +152,24 @@ class CurrentLocationActivity : Fragment() {
                 }
             }
         }
+    }
+    fun updateDataset(location: Location, beaconInformation: BeaconInformation){
+        this.location = location
+        this.beaconInformation = beaconInformation
+        for (floor in location!!.floors) {
+            if (floor.floor_id == beaconInformation.place) {
+                tv_roomPosition.text = floor.name
+                for (room in floor.rooms) {
+                    if (room.room_id == beaconInformation.item) {
+                        tv_roomName.text = room.name
+                        Glide.with(this.activity!!).load(room.image).into(iv_roomImage)
+                        lv_currentLocation_items.adapter =
+                            DescriptionArrayAdapter(context!!, R.id.lv_currentLocation_items, room.stuff.toList())
+                        return
+                    }
+                }
+            }
+        }
+
     }
 }

@@ -42,6 +42,9 @@ class MyPagerAdapter(fragmentManager: FragmentManager, context: Context) : Fragm
         fragmentList.add(fragment)
         tabTitles.add(title)
     }
+    fun getFragments(): MutableList<Fragment>{
+        return fragmentList
+    }
     override fun getCount(): Int {
         return fragmentList.size
     }
