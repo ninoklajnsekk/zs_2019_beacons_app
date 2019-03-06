@@ -1,4 +1,4 @@
-package si.inova.zimskasola.activities
+package si.inova.zimskasola.fragments
 
 import android.content.Context
 import android.net.ConnectivityManager

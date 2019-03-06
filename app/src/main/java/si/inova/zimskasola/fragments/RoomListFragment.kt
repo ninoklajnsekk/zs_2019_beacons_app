@@ -1,7 +1,8 @@
-package si.inova.zimskasola.activities
+package si.inova.zimskasola.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import com.example.zimskasola.R
 import kotlinx.android.synthetic.main.fragment_room_list.*
+import si.inova.zimskasola.activities.RoomInfoActivity
 import si.inova.zimskasola.adapters.CustomRoomListAdapter
 import si.inova.zimskasola.data.Location
 import si.inova.zimskasola.data.LocationData
@@ -17,7 +19,8 @@ import si.inova.zimskasola.data.VolleyCallback
 
 class RoomListFragment : Fragment() {
 
-    lateinit var location: Location
+    private var locationData: Location? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_room_list, container, false)
@@ -29,20 +32,38 @@ class RoomListFragment : Fragment() {
 
         val callback = object : VolleyCallback {
             override fun onSuccessResponse(result: si.inova.zimskasola.data.Location) {
-                Log.d("onActivityRoom", "suh")
-                updateListview(result)
+                locationData = result
+                updateListview()
             }
         }
+
         val loc = LocationData(context!!, callback)
         loc.getLocationData()
-
+        errorListener()
 
     }
 
-    fun updateListview(location: Location) {
-        lv_roomList.adapter = CustomRoomListAdapter(this.context!!, location)
+    fun errorListener(){
+            Handler().postDelayed({
+                if (locationData == null) {
+                    onErrorFetchingData()
+                }
+            }, 5000)
+    }
+
+    private fun onErrorFetchingData() {
+        roomlist_ll_default_error.visibility = View.VISIBLE
+        tv_prostoriTV.visibility = View.INVISIBLE
+        lv_roomList.visibility = View.INVISIBLE
+    }
+
+    fun updateListview() {
+
+        roomlist_shimmer_view_container.visibility = View.INVISIBLE
+
+        lv_roomList.adapter = CustomRoomListAdapter(this.context!!, locationData!!)
         lv_roomList.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-            var list = getCorrectIndex(i, location)
+            var list = getCorrectIndex(i, locationData!!)
 
 
             var i: Intent = Intent(context, RoomInfoActivity::class.java)

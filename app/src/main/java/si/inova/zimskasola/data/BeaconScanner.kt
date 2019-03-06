@@ -18,7 +18,6 @@ class BeaconScanner(context: Context, callback: BeaconCallback) : MessageListene
     var currentBeaconId:String? = null
     private lateinit var currentBeaconInformation: BeaconInformation
 
-
     override fun onFound(message: Message) {
         Log.d(LOG_TAG, "BeaconFound")
         super.onFound(message)
@@ -29,7 +28,7 @@ class BeaconScanner(context: Context, callback: BeaconCallback) : MessageListene
 
         // Probably the worst way to do things, but it'll do. Gotta get that technical dept higher!
 
-        var location: String = attachmentList[0].substring("location:".length,attachmentList[0].length)
+        var location: String = attachmentList[0].substring("locationData:".length,attachmentList[0].length)
         var place: String = attachmentList[1].substring("place:".length,attachmentList[1].length)
         var item: String = attachmentList[2].substring("item:".length,attachmentList[2].length)
 
@@ -48,12 +47,14 @@ class BeaconScanner(context: Context, callback: BeaconCallback) : MessageListene
 
     }
 
-    fun subscribe(){
+    fun subscribe(): BeaconScanner{
 
         Log.i("beacon_subscribe", "Subscribing.");
 
         val options = SubscribeOptions.Builder().setStrategy(Strategy.BLE_ONLY).build()
         Nearby.getMessagesClient(context).subscribe(this,options)
+
+        return this
 
     }
     fun unsubscribe(){

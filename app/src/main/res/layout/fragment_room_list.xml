@@ -6,6 +6,22 @@
               android:layout_height="match_parent"
               android:theme="@style/Theme.AppCompat.Light">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/roomlist_shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:shimmer_duration="800">
+
+
+        <include layout="@layout/data_placeholder_roomlist"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <include android:id="@+id/roomlist_ll_default_error" android:layout_height="match_parent"
+             android:layout_width="match_parent" layout="@layout/default_error_layout" android:visibility="gone"/>
+
     <TextView android:textColor="#000" android:id="@+id/tv_prostoriTV" android:fontFamily="@font/merriweatherbolditalic"
               android:textSize="28sp" android:layout_width="match_parent" android:layout_height="wrap_content"
               android:text="@string/prostori" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="28dp"

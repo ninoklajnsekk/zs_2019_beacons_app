@@ -12,5 +12,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main_swipe">MainSwipeActivity</string>
     <string name="prostori">Prostori</string>
+    <string name="preveri_internetno_povezavo_in_poskusi_znova">Preveri internetno povezavo in poskusi znova</string>
+    <string name="ups_prislo_je_do_napake">Ups, prišlo je do napake.</string>
 
 </resources>

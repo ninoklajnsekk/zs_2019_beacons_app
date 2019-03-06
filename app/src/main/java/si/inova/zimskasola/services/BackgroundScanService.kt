@@ -1,16 +1,14 @@
-package si.inova.zimskasola
+package si.inova.zimskasola.services
 
 
 import android.app.*
 import android.content.Intent
-import android.os.IBinder
 import android.os.Parcel
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.messages.MessageListener
 import com.google.android.gms.nearby.messages.Strategy
 import com.google.android.gms.nearby.messages.SubscribeOptions
 
-import android.os.Binder
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat

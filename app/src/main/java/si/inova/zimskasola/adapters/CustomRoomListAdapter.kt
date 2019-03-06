@@ -22,17 +22,16 @@ import kotlin.math.floor
 
 class CustomRoomListAdapter(context: Context, locationList: Location) : BaseAdapter() {
     // This could've been done better and easier but hey, it's working.
-    private lateinit var locationList: Location
+
     private var counter: Int = 0
-    private lateinit var context: Context
-    private var layoutInflater: LayoutInflater
+    private var context: Context = context
+    private var layoutInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private var locationList: Location = locationList
 
     init {
-        layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        this.locationList = locationList
 
         calculateCounter()
-        this.context = context
+
     }
 
     fun calculateCounter() {

@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:background="#2135fd" android:text="ERROR"/>
-</LinearLayout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:orientation="vertical"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="#fff">
+
+
+    <ImageView
+            android:layout_marginTop="84dp"
+            android:id="@+id/iv_napaka_icon" android:layout_width="80dp" android:layout_height="72dp"
+            android:src="@drawable/napaka_icon" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"/>
+    <TextView android:layout_marginTop="56dp" android:id="@+id/tv_prislo_do_napake"
+              app:layout_constraintTop_toBottomOf="@+id/iv_napaka_icon" android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:textColor="#000" android:textSize="28sp"
+              android:fontFamily="@font/merriweatherbolditalic" android:text="@string/ups_prislo_je_do_napake"
+              app:layout_constraintRight_toRightOf="parent" app:layout_constraintLeft_toLeftOf="parent"/>
+    <TextView android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/tv_prislo_do_napake" android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:textColor="#000"
+              android:textSize="13sp" android:fontFamily="@font/montserratregular"
+              android:text="@string/preveri_internetno_povezavo_in_poskusi_znova"
+              app:layout_constraintRight_toRightOf="parent" app:layout_constraintLeft_toLeftOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

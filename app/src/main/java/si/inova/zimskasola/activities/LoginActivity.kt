@@ -26,11 +26,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        /*
-        * Delete before release
-        */
-
-
         /* Initialize variables */
         firebaseAuth = FirebaseAuth.getInstance()
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -39,15 +34,16 @@ class LoginActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso!!)
 
-        //if(mGoogleSignInClient != null)
-            //loginSuccessful()
+        var currUser = firebaseAuth!!.currentUser
+
+        if(currUser != null)
+            loginSuccessful()
 
 
 
         cl_loginWithG_button.setOnClickListener {
             val signInIntent = mGoogleSignInClient?.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
-
         }
 
         // When we log in -> finish() or check for logged user

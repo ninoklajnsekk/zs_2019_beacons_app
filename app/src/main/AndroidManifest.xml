@@ -19,7 +19,7 @@
         </activity>
 
         <service
-                android:name="si.inova.zimskasola.BackgroundScanService"
+                android:name="si.inova.zimskasola.services.BackgroundScanService"
                 android:enabled="true"
                 android:exported="true">
         </service>

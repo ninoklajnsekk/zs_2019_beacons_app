@@ -2,16 +2,12 @@ package si.inova.zimskasola.data
 
 import android.content.Context
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import org.json.JSONObject
-import si.inova.zimskasola.CurrentLocationActivity
+import java.io.Serializable
 
 class LocationData(context: Context, callback: VolleyCallback) {
 
@@ -50,7 +46,7 @@ data class Location(
     var description: String,
     var floors: MutableCollection<Floor>
 
-) {
+)  :Serializable{
     constructor() : this("", "", mutableListOf(Floor()))
 }
 
@@ -59,18 +55,18 @@ data class Floor(
     var name: String,
     var rooms: MutableCollection<Room>
 
-) {
+)  :Serializable{
     constructor() : this("", "", mutableListOf(Room()))
 }
 
 data class Room(
-    var room_id: String,
-    var beacon_id: String,
-    var name: String,
-    var image: String,
-    var stuff: MutableCollection<Stuff>
+    var room_id: String = "",
+    var beacon_id: String = "",
+    var name: String = "",
+    var image: String = "",
+    var stuff: MutableCollection<Stuff> = mutableListOf()
 
-) {
+) :Serializable{
     constructor() : this("", "", "", "", mutableListOf(Stuff()))
 }
 

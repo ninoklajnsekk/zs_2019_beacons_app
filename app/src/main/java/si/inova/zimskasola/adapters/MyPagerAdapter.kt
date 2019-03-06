@@ -1,20 +1,9 @@
 package si.inova.zimskasola.adapters
 
 import android.content.Context
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
-import si.inova.zimskasola.CurrentLocationActivity
-import si.inova.zimskasola.activities.RoomListFragment
-import android.text.Spannable
-import android.text.style.ImageSpan
-import android.text.SpannableString
-import android.graphics.drawable.Drawable
-import androidx.annotation.Dimension
-import androidx.core.content.ContextCompat
-import com.example.zimskasola.R
 
 
 class MyPagerAdapter(fragmentManager: FragmentManager, context: Context) : FragmentStatePagerAdapter(fragmentManager){

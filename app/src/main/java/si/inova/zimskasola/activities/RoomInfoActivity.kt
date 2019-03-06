@@ -2,7 +2,9 @@ package si.inova.zimskasola.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.zimskasola.R
@@ -16,7 +18,7 @@ import si.inova.zimskasola.observers.BeaconInformation
 
 class RoomInfoActivity : FragmentActivity() {
 
-    lateinit var location: Location
+    var location: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +39,21 @@ class RoomInfoActivity : FragmentActivity() {
             }
         })
 
+
+        Handler().postDelayed({
+            if (location == null) {
+                onErrorAction()
+            }
+
+        }, 15000)
+
+
     }
 
+    fun onErrorAction(){
+        room_info_error.visibility = View.VISIBLE
+        room_info_content.visibility = View.GONE
+    }
 
     fun updateLocation(floorIndex: Int, roomIndex: Int) {
         // Update floor and room

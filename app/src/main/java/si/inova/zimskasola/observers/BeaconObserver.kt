@@ -1,15 +1,15 @@
 package si.inova.zimskasola.observers
 
-import si.inova.zimskasola.CurrentLocationActivity
+import si.inova.zimskasola.fragments.CurrentLocationFragment
 
-class BeaconObserver(currentLocationActivity: CurrentLocationActivity) : Observer {
+class BeaconObserver(currentLocationActivity: CurrentLocationFragment) : Observer {
 
     val currentLocationActivity = currentLocationActivity
 
 
     override fun action(beaconInformation: BeaconInformation?) {
 
-        currentLocationActivity.updateBeacon(beaconInformation!!)
+
 
     }
 
